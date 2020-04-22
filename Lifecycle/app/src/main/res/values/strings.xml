@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">Lifecycle</string>
-    <string name="textHello">Hello world!!¡!</string>
-    <string name="textButton">This is the button text</string>
+    <string name="helloWorld">Hello world!!¡!</string>
+    <string name="textButton">Send</string>
 </resources>
