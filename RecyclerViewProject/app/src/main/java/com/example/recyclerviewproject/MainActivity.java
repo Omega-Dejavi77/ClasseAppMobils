@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
 
     // ALTERNATIVE VERSION TO RESTORE DATA
     /*@Override
-    public void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState); // Do first
 
         // Be careful it must be created after storing the data in the set
