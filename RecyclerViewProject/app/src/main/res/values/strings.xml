@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">RecyclerViewProject</string>
+    <string name="addButton">ADD TO DO</string>
 </resources>
