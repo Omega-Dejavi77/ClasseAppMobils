@@ -58,8 +58,6 @@ public class TodoFragment extends Fragment {
         collecionView.setLayoutManager(layoutManager);
 
         CreateDummyContent();
-        dataSet = savedInstanceState.getParcelableArrayList("dataSet");
-        todoText.setText(savedInstanceState.getString("todoText"));
 
         todoAdapter = new TodoAdapter(dataSet);
         collecionView.setAdapter(todoAdapter);
