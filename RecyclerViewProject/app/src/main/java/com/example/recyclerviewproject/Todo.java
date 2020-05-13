@@ -14,6 +14,11 @@ public class Todo implements Parcelable {
         this.id = new Random().nextInt(9999);
     }
 
+    public Todo(int id, String task){
+        this.task = task;
+        this.id = id;
+    }
+
     protected Todo(Parcel in) {
         super();
         readFromParcel(in);

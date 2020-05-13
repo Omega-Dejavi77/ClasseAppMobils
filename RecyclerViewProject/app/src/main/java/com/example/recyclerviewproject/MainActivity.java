@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.database.Cursor;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.view.View;
@@ -20,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ArrayList<Todo> dataSet;
     private TodoAdapter todoAdapter;
+    private DbAdapter dbAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,13 +34,6 @@ public class MainActivity extends AppCompatActivity {
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         collecionView.setLayoutManager(layoutManager);
-
-        if (savedInstanceState == null) { //It is NOT a 'reboot' or 'reload'
-            CreateDummyContent();
-        } else { //It is a 'reboot' or 'reload', so restore data
-            dataSet = savedInstanceState.getParcelableArrayList("dataSet");
-            todoText.setText(savedInstanceState.getString("todoText"));
-        }
 
         todoAdapter = new TodoAdapter(dataSet);
         collecionView.setAdapter(todoAdapter);
@@ -53,34 +48,37 @@ public class MainActivity extends AppCompatActivity {
                 todoText.setText("");
             }
         });
+
+        initDB();
     }
 
-    private void CreateDummyContent() {
-        dataSet = new ArrayList<>();
-        dataSet.add(new Todo("Task 1"));
-        dataSet.add(new Todo("Task 2"));
-        dataSet.add(new Todo("Task 3"));
-        dataSet.add(new Todo("Task 4"));
+    private void initDB() {
+        dbAdapter = DbAdapter.getInstance(this);
+        dbAdapter.open();
+        if (dbAdapter.isEmpty()){
+            dbAdapter.createTodo(new Todo("Sarandonga"));
+            dbAdapter.createTodo(new Todo("Cuchibiry"));
+            dbAdapter.createTodo(new Todo("Xuxibiri"));
+            dbAdapter.createTodo(new Todo("Vamoh a come"));
+        }
+        fetchData();
+    }
+
+    private void fetchData(){
+        Cursor todosCursor = dbAdapter.fetchAllTodos();
+
+        this.dataSet = new ArrayList<>();
+        for (todosCursor.moveToFirst(); !todosCursor.isAfterLast(); todosCursor.moveToNext()){
+            this.dataSet.add(new Todo (todosCursor.getInt(0), todosCursor.getString(1)) );
+        }
+
+        todoAdapter = new TodoAdapter(dataSet);
+        collecionView.setAdapter(todoAdapter);
     }
 
     @Override
-    public void onSaveInstanceState(@NonNull Bundle outState) {
-        outState.putParcelableArrayList("dataSet", dataSet);
-        outState.putString("todoText", todoText.getText().toString());
-
-        super.onSaveInstanceState(outState); // Do last
+    protected void onDestroy() {
+        dbAdapter.close();
+        super.onDestroy();
     }
-
-    // ALTERNATIVE VERSION TO RESTORE DATA
-    /*@Override
-    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState); // Do first
-
-        // Be careful it must be created after storing the data in the set
-        todoAdapter = new TodoAdapter(dataSet);
-        collecionView.setAdapter(todoAdapter);
-
-        CreateAndSetTodoAdapter();
-    }*/
-
 }
