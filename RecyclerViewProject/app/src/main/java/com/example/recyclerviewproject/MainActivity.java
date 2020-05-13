@@ -1,6 +1,7 @@
 package com.example.recyclerviewproject;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -11,6 +12,7 @@ import android.os.PersistableBundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -42,10 +44,24 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String todoName = todoText.getText().toString();
-                dataSet.add(new Todo(todoName));
-                todoAdapter.notifyDataSetChanged();
+                if (todoName.isEmpty()){
 
-                todoText.setText("");
+                    /* // POPUP SCREEN - Alert Dialog
+                    AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                    builder.setMessage("Task field is empty");
+                    builder.create().show();*/
+
+                    // TOAST
+                    Toast toast = Toast.makeText(MainActivity.this, "Task field is empty", Toast.LENGTH_SHORT);
+                    toast.show();
+
+                } else {
+                    Todo todo = new Todo(todoName);
+                    dbAdapter.createTodo(todo);
+                    dataSet.add(todo);
+                    todoAdapter.notifyDataSetChanged();
+                    todoText.setText("");
+                }
             }
         });
 
