@@ -57,12 +57,9 @@ public class TodoFragment extends Fragment {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         collecionView.setLayoutManager(layoutManager);
 
-        if (savedInstanceState == null) { //It is NOT a 'reboot' or 'reload'
-            CreateDummyContent();
-        } else { //It is a 'reboot' or 'reload', so restore data
-            dataSet = savedInstanceState.getParcelableArrayList("dataSet");
-            todoText.setText(savedInstanceState.getString("todoText"));
-        }
+        CreateDummyContent();
+        dataSet = savedInstanceState.getParcelableArrayList("dataSet");
+        todoText.setText(savedInstanceState.getString("todoText"));
 
         todoAdapter = new TodoAdapter(dataSet);
         collecionView.setAdapter(todoAdapter);
