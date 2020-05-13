@@ -41,6 +41,7 @@ public class TodoFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRetainInstance(true);
     }
 
     @Override
@@ -57,7 +58,8 @@ public class TodoFragment extends Fragment {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         collecionView.setLayoutManager(layoutManager);
 
-        CreateDummyContent();
+        if (dataSet == null)
+            CreateDummyContent();
 
         todoAdapter = new TodoAdapter(dataSet);
         collecionView.setAdapter(todoAdapter);
