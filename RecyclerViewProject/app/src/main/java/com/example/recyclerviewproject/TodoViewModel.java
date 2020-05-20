@@ -9,12 +9,13 @@ import androidx.lifecycle.LiveData;
 import java.util.List;
 
 public class TodoViewModel extends AndroidViewModel {
-    private DataBaseController repository;
-    private LiveData<List<Todo>> allTodos;
+    private DataRepository repository;
+    private LiveData<List<Todo>> allTodos; // És una referència a un mètode, no a dades
 
     public TodoViewModel(@NonNull Application application) {
         super(application);
-        repository = new DataBaseController(application);
+        repository = new DataRepository(application);
+        // Assignació del mètode a utilitzar cada cop que es vulguin consultar les dades d'allTodos
         allTodos = repository.fetchAll();
     }
 

@@ -8,11 +8,11 @@ import androidx.lifecycle.LiveData;
 import java.util.List;
 
 // Proxy between persistence and view.
-public class DataBaseController {
+public class DataRepository {
     private TodoDao todoDao;
     private LiveData<List<Todo>> allTodos;
 
-    public DataBaseController(Application application){
+    public DataRepository(Application application){
         AppDatabase db = AppDatabase.getDatabase(application);
         todoDao = db.todoDao();
 
@@ -24,7 +24,7 @@ public class DataBaseController {
         return allTodos;
     }
 
-    public void setTodo(String task){
+    public void setTodo(String task) { // AddTodo
         Todo newTodo = new Todo();
         newTodo.task = task;
         new insertAsyncTask(todoDao).execute(newTodo);

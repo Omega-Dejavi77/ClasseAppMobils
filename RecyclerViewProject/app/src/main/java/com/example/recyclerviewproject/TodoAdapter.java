@@ -8,7 +8,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -37,7 +36,7 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder> {
     // Allows setting the data of each item
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Todo currentTodo = data.get(position);
-        holder.id.setText(currentTodo.id);
+        holder.id.setText(currentTodo.id + "");
         holder.task.setText(currentTodo.task);
     }
 
