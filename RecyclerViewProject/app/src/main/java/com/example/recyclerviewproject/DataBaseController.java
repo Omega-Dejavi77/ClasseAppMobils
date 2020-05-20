@@ -40,6 +40,7 @@ public class DataBaseController {
         @Override
         protected Void doInBackground(Todo... todos) {
             todoDao.insertTodo(todos[0]);
+            return null;
         }
     }
 }
