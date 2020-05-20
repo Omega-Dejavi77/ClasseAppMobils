@@ -9,13 +9,18 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder> {
+    private List<Todo> data = Collections.emptyList();
 
-    private ArrayList<Todo> data;
+    public TodoAdapter(){
+    }
 
-    public TodoAdapter(ArrayList<Todo> data) {
+    public void setTodos(List<Todo> data){
         this.data = data;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -32,8 +37,8 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder> {
     // Allows setting the data of each item
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Todo currentTodo = data.get(position);
-        holder.id.setText(currentTodo.getIdAsString());
-        holder.task.setText(currentTodo.getTask());
+        holder.id.setText(currentTodo.id);
+        holder.task.setText(currentTodo.task);
     }
 
     @Override
