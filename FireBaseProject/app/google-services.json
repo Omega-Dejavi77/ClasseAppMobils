@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "999590582589",
+    "firebase_url": "https://fir-project-e9886.firebaseio.com",
+    "project_id": "fir-project-e9886",
+    "storage_bucket": "fir-project-e9886.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:999590582589:android:e57ace022bd1f25ecc0d54",
+        "android_client_info": {
+          "package_name": "cat.tecnocampus.mobileapps.practica2.firebaseproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "999590582589-m79knkluf2jjpkt9skfuempl0q37nvgc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "cat.tecnocampus.mobileapps.practica2.firebaseproject",
+            "certificate_hash": "005a15dbaa21871299139e06b225e199fc8cfcc1"
+          }
+        },
+        {
+          "client_id": "999590582589-vs1m4t2vmio6smklsi232r6nk23iod8e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDcydCrsVGok9pqxHlQ08dkK3KaTGSis5o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "999590582589-vs1m4t2vmio6smklsi232r6nk23iod8e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
