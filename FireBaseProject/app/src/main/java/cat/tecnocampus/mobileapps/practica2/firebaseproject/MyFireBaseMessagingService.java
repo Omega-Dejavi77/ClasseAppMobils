@@ -1,5 +1,6 @@
 package cat.tecnocampus.mobileapps.practica2.firebaseproject;
 
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
@@ -7,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.IBinder;
 import android.util.Log;
 
@@ -28,7 +30,17 @@ public class MyFireBaseMessagingService extends FirebaseMessagingService {
         if (remoteMessage.getNotification() != null) {
             String body = remoteMessage.getNotification().getBody();
             Log.d(TAG, "Message Notification Body: " + body);
+            createNotificationsChannel();
             createNotification(body);
+        }
+    }
+
+    private void createNotificationsChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            String tag = "Notis Test";
+            NotificationChannel channel = new NotificationChannel(MainActivity.CHANNEL_ID, tag, NotificationManager.IMPORTANCE_DEFAULT);
+            NotificationManager manager = getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(channel);
         }
     }
 
